@@ -10,6 +10,8 @@ import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
 import Dashboard from "../LayOut/DashBoard";
 import Cart from "../Pages/DashBoard/Cart/Cart";
+import PrivateRoute from "./PrivateRoute";
+import AllUsers from "../Pages/DashBoard/AllUsers/AllUsers";
 
 
  export const router = createBrowserRouter([
@@ -41,12 +43,19 @@ import Cart from "../Pages/DashBoard/Cart/Cart";
     },
     {
       path: 'dashboard',
-      element: <Dashboard></Dashboard>,
+      element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
       children: [
         {
           path: 'cart',
           element: <Cart></Cart>
-        }
+        },
+
+
+        // admin 
+          {
+            path:'allUsers',
+            element:<AllUsers></AllUsers>
+          }
       ]
     }
   ]);
