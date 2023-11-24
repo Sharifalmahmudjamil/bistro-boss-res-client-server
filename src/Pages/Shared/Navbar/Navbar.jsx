@@ -19,7 +19,7 @@ const Navbar = () => {
         <>
             <li className="lg:text-white "><NavLink to="/">Home</NavLink></li>
             <li className="lg:text-white"><NavLink to="/addProduct">CONTACT US</NavLink></li>
-            <li className="lg:text-white"><NavLink to="/cart">DASHBOARD</NavLink></li>
+            <li className="lg:text-white"><NavLink to="/dashboard">DASHBOARD</NavLink></li>
             <li className="lg:text-white"><NavLink to="/menu">Our Menu</NavLink></li>
             <li className="lg:text-white"><NavLink to="/order/salad">Order Food</NavLink></li>
             <li> <Link to='/dashboard/cart'>
