@@ -1,7 +1,4 @@
-import {
-    createBrowserRouter,
-    
-  } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import MainLayOut from "../LayOut/MainLayOut";
 import Home from "../Pages/Home/Home/Home";
 import Menu from "../Pages/Menu/Menu/Menu";
@@ -20,82 +17,122 @@ import Payment from "../Pages/DashBoard/Payment/Payment";
 import PaymentHistory from "../Pages/DashBoard/PaymentHistory/PaymentHistory";
 import UserHome from "../Pages/DashBoard/UserHome/UserHome";
 import AdminHome from "../Pages/DashBoard/AdminHome/AdminHome";
+import ContactUs from "../Pages/Home/ContactUs/ContactUs";
+import Reservation from "../Pages/DashBoard/Reservation/Reservation";
+import ManageReservation from "../Pages/DashBoard/ManageReservation/ManageReservation";
 
+export const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <MainLayOut></MainLayOut>,
+    children: [
+      {
+        path: "/",
+        element: <Home></Home>,
+      },
+      {
+        path: "menu",
+        element: <Menu></Menu>,
+      },
+      {
+        path: "order/:category",
+        element: <Order></Order>,
+      },
+      {
+        path: "login",
+        element: <Login></Login>,
+      },
+      {
+        path: "signUp",
+        element: <SignUp></SignUp>,
+      },
+      {
+        path: "contact",
+        element: <ContactUs></ContactUs>,
+      },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "userHome",
+        element: <UserHome></UserHome>,
+      },
+      {
+        path: "cart",
+        element: <Cart></Cart>,
+      },
+      {
+        path: "payment",
+        element: <Payment></Payment>,
+      },
+      {
+        path: "paymentHistory",
+        element: <PaymentHistory></PaymentHistory>,
+      },
+      {
+        path: "reservation",
+        element: <Reservation></Reservation>,
+      },
 
- export const router = createBrowserRouter([
-    {
-      path: "/",
-      element:<MainLayOut></MainLayOut>,
-      children:[
-        {
-            path:'/',
-            element:<Home></Home>
-        },
-        {
-          path:'menu',
-          element:<Menu></Menu>
-        },
-        {
-          path:'order/:category',
-          element:<Order></Order>
-        },
-        {
-          path:'login',
-          element:<Login></Login>
-        },
-        {
-          path:'signUp',
-          element:<SignUp></SignUp>
-        },
-      ]
-    },
-    {
-      path: 'dashboard',
-      element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
-      children: [
+      // admin
+      {
+        path: "adminHome",
+        element: (
+          <AdminRoute>
+            <AdminHome></AdminHome>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "allUsers",
+        element: (
+          <AdminRoute>
+            <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
+      },
 
-        {
-          path: 'userHome',
-          element: <UserHome></UserHome>
-        },
-        {
-          path: 'cart',
-          element: <Cart></Cart>
-        },
-        {
-          path: 'payment',
-          element:<Payment></Payment>
-        },
-        {
-          path: 'paymentHistory',
-          element:<PaymentHistory></PaymentHistory>
-        },
-
-
-        // admin 
-          {
-            path:'adminHome',
-            element:<AdminRoute><AdminHome></AdminHome></AdminRoute>
-          },
-          {
-            path:'allUsers',
-            element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
-          },
-
-          {
-            path:'addItems',
-            element:<AdminRoute><AddItems></AddItems></AdminRoute>
-          },
-          {
-            path:'manageItems',
-            element:<AdminRoute><ManageItems></ManageItems></AdminRoute>
-          },
-          {
-            path:'updateItem/:id',
-            element:<AdminRoute><UpdateItem></UpdateItem></AdminRoute>,
-            loader:({params})=>fetch(`http://localhost:5000/menu/${params.id}`)
-          },
-      ]
-    }
-  ]);
-
+      {
+        path: "addItems",
+        element: (
+          <AdminRoute>
+            <AddItems></AddItems>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "manageItems",
+        element: (
+          <AdminRoute>
+            <ManageItems></ManageItems>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "manageReservation",
+        element: (
+          <AdminRoute>
+            <ManageReservation></ManageReservation>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "updateItem/:id",
+        element: (
+          <AdminRoute>
+            <UpdateItem></UpdateItem>
+          </AdminRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/menu/${params.id}`),
+      },
+    ],
+  },
+]);
